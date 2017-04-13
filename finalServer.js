@@ -71,7 +71,7 @@ app.post('/dSendVitals', function(req,res){
             };
             //if bio fields are not null ->, if null, then a different query
             //if else logic is for re-visit, the update inside the if is an upsert and is a provision existing/new patients
-            if (!(name=="")) {
+            if (!name) {
                 //This upsert logic: we are using the same page for new and existing. So this is a provision for error free insert
                 collection.update(
                     {"_id": parseInt(pat_id)},
@@ -86,7 +86,8 @@ app.post('/dSendVitals', function(req,res){
             else {
                 //a simulation for: if we actually create a page for existing patient
                 //currently we simulate this by not putting the patients name
-                collection.update(
+                console.log("Update comes from here");
+                collection.updateOne(
                     {"_id": parseInt(pat_id)},
                     {"$set":{"vitals": vitals}}
                 );
@@ -178,7 +179,6 @@ function getdata(vital) {
                 //compare values and trigger appointment if needed
             //#todo: Cannot read property 'dataset' of undefined
                 if(vital == 'heartrate'){
-                    console.log(kar);
                     if(JSON.parse(kar)["activities-heart-intraday"]["dataset"].length>0) {
                         notify(JSON.parse(kar)["activities-heart-intraday"]["dataset"][0]["value"]);
                     }
@@ -203,8 +203,7 @@ function notify(heartValue){
             var collection = db.collection('patient');
 
             var cursor = collection.findOne({"_id":parseInt(pat_id)},function(err, document){
-                console.log("Extacted min hear val" +(document.vitals.minHeart > heartValue));
-                if((heartValue)<(document.vitals.minHeart) ||(heartValue)>(document.vitals.maxHeart)){
+                if((heartValue)<(document.vitals.minHeartRate) ||(heartValue)>(document.vitals.maxHeartRate)){
                     //emit data on all receiving sockets
                     console.log("In the if part");
 
