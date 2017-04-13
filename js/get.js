@@ -39,7 +39,7 @@ function getSleeplog(token, resp) {
   var auth = "";
 
   if (token == "dummy")
-  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA1NjM2MiwiaWF0IjoxNDkyMDI3NTYyfQ.17MiKQCDOB2FlJzFX3NqIuwmnJBCCEod86Usr1dMjKo';
+  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA4NjM5NiwiaWF0IjoxNDkyMDU3NTk2fQ.1m3-5tVpgAMUg8sWoqpybPDd-jO920uoMOVpaXo9OK0';
   else
   auth = 'Bearer ' + token;
 
@@ -77,7 +77,7 @@ function getHeartrate(token, resp) {
   var auth = "";
 
   if (token == "dummy")
-  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA1NjM2MiwiaWF0IjoxNDkyMDI3NTYyfQ.17MiKQCDOB2FlJzFX3NqIuwmnJBCCEod86Usr1dMjKo';
+  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA4NjM5NiwiaWF0IjoxNDkyMDU3NTk2fQ.1m3-5tVpgAMUg8sWoqpybPDd-jO920uoMOVpaXo9OK0';
   else
   auth = 'Bearer ' + token;
 
@@ -127,7 +127,7 @@ function getSteps(token, resp) {
   var auth = "";
 
   if (token == "dummy")
-  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA1NjM2MiwiaWF0IjoxNDkyMDI3NTYyfQ.17MiKQCDOB2FlJzFX3NqIuwmnJBCCEod86Usr1dMjKo';
+  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA4NjM5NiwiaWF0IjoxNDkyMDU3NTk2fQ.1m3-5tVpgAMUg8sWoqpybPDd-jO920uoMOVpaXo9OK0';
   else
   auth = 'Bearer ' + token;
 

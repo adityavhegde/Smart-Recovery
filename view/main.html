@@ -5,10 +5,9 @@
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-  <script src="scripts/jquery-3.1.0.min.js"></script>
-  <script src="scripts/canvasjs.min.js"></script>
+  <script src="../scripts/jquery-3.1.0.min.js"></script>
+  <script src="../scripts/canvasjs.min.js"></script>
   
-<script src="resources/scripts/notification.js"></script>
 
  <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
@@ -71,14 +70,16 @@ integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7T
 <!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
 <script>
     $(function(){
+        var notified = false;
         var socket = io('http://localhost:8080/');
         /*Data format
         * 7 value points - past 7 days
         * Patient ID
         * */
-        socket.on('notification', function(msg){
+        socket.on('notification', function(msg) {
             console.log('main.html connected');
 
+            if (!notified) {
             var notification = new Notification('New appointment', {
                 icon: '../images/notification.png',
                 body: "Hey Doctor! There's a new appointment!"
@@ -86,7 +87,9 @@ integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7T
 
             notification.onclick = function () {
                 window.open("dashboard.html");
-            };
+            }
+            notified = true;
+            } //if ends
         });
 
     });

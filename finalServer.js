@@ -112,7 +112,7 @@ app.post('/cConnect',function(req, res){
  * 1. Receives threshold crossed message, res (response) should send available dates in json
  * 2. Send a notification to the desktop app, which is clickable to see history
  * */
-/*#todo: should also recieive patient id
+/*
 app.post('/cThresholdCrossed',function(req,res){
     For full version: refer app.js
 });*/
@@ -177,15 +177,13 @@ function getdata(vital) {
 
                 //parse the json to get the value required and then fetch threshold from db.
                 //compare values and trigger appointment if needed
-            //#todo: Cannot read property 'dataset' of undefined
                 if(vital == 'heartrate'){
                     if(!kar.includes("error")) {
                         if (JSON.parse(kar)["activities-heart-intraday"]["dataset"].length > 0) {
                             notify(JSON.parse(kar)["activities-heart-intraday"]["dataset"][0]["value"]);
                         }
                     }
-                    //#todo: remove this
-                    //notify(40);
+                   notify(91);
                 } //vital check if ends
             }
         );
@@ -195,6 +193,7 @@ function getdata(vital) {
 //this will never run if the heartRate is 0
 //Nil values fail proof
 function notify(heartValue){
+    console.log("notifying");
     var url = "mongodb://localhost:27017/persons";
     var pat_id = 2;
     var history= [];
