@@ -179,8 +179,10 @@ function getdata(vital) {
                 //compare values and trigger appointment if needed
             //#todo: Cannot read property 'dataset' of undefined
                 if(vital == 'heartrate'){
-                    if(JSON.parse(kar)["activities-heart-intraday"]["dataset"].length>0) {
-                        notify(JSON.parse(kar)["activities-heart-intraday"]["dataset"][0]["value"]);
+                    if(!kar.includes("error")) {
+                        if (JSON.parse(kar)["activities-heart-intraday"]["dataset"].length > 0) {
+                            notify(JSON.parse(kar)["activities-heart-intraday"]["dataset"][0]["value"]);
+                        }
                     }
                     //#todo: remove this
                     //notify(40);
