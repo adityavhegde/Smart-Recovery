@@ -183,7 +183,7 @@ function getdata(vital) {
                             notify(JSON.parse(kar)["activities-heart-intraday"]["dataset"][0]["value"]);
                         }
                     }
-                   notify(91);
+                   //notify(91);
                 } //vital check if ends
             }
         );

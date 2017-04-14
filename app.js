@@ -4,10 +4,11 @@
 
 var app = require('express')();
 var bodyParser = require('body-parser');
-
+var cron = require('cron');
 
 //socket functionalities
 var http = require('http').Server(app);
+var fitbit_http = require('http');
 var io = require('socket.io')(http);
 
 app.use(bodyParser.json());
@@ -16,8 +17,40 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var mongoC = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/persons"; //persons is the db
 var globalSocket;
+var sockets = [];
 
 setupSocket();
+//==================   CRON   =============================
+/*var cronJob = cron.job("0,30 * * * * *", function(){
+    // perform operation e.g. GET request http.get() etc.
+    var options = {
+        host: 'localhost',
+        port: '9000',
+        path: '/getSteps',
+        method: 'GET',
+        headers: {
+            //nothing
+        }
+    };
+
+var get_req = fitbit_http.request(options, function(res) {
+     res.setEncoding('utf8');
+     var kar = "";
+     res.on('data', function (chunk) {
+            kar = kar + chunk;
+      });
+      res.on('end', function (chunk) {
+                console.log(kar);
+            }
+        );
+    });
+    get_req.end();
+
+    console.info('cron job completed');
+});
+cronJob.start(); */
+//==================   CRON ENDS  =========================
+
 
 //Below is the route to be used by doctor to send all the vitals
 //These are the vitals that will be tracked
@@ -44,7 +77,8 @@ app.post('/dSendVitals', function(req,res){
 
             //insert newly
             var name = req.body.name;
-            console.log(name=="");
+            console.log(req.body);
+            console.log(name);
             var gender = req.body.gender;
             var age = req.body.age;
             var weight = req.body.weight;
@@ -82,7 +116,7 @@ app.post('/dSendVitals', function(req,res){
         } //else ends
         });
     //#todo: try to re-draw the main page
-    res.send("<h1>Vitals have been set</h1>");
+    res.redirect('/view/dashboard.html');
 
 });
 
@@ -121,38 +155,61 @@ app.post('/cConnect',function(req, res){
 });
 
 
-app.post('/cAppointment', function(req, res){
-    //this request will contain a json file
-    //send patient_id and availability to findAvailability.js
-    var patient_id = req.body._id;
-    var patient_appointment = req.body.appointment; //this is an array
-
-    //send this to findAvailability.js
-    //return -> available slot and date
-    //slot is only a number -> get mapping to actual time
-    //the response would be an
-    //send a JSON file as a response
-    res.send();
-});
-
 //route for: message from client that threshhold has crossed
+/*This route:
+* 1. Receives threshold crossed message, res (response) should send available dates in json
+* 2. Send a notification to the desktop app, which is clickable to see history
+* */
 //#todo: should also recieive patient id
 app.post('/cThresholdCrossed',function(req,res){
+    //This module also sends an appointment
+    /* Post message format
+    * p_id
+    * availability: for now we have it on a database #todo
+    * vitals: for which threshold was crossed
+    * */
+    var p_id = 1; //hardcoded -> should come from Android apps payload
+    var availability = {
+        "date":"2017-04-10", "slot":"s3"
+    } //this is for appointment scheduling
+    var vitals; //receive vitals history
+    //send this to the front end system, which can click the notification to see this vitals
     console.log("Danger: user vitals have crossed threshhold");
     console.log("Sockets open ? "+globalSocket.connected);
-    globalSocket.emit('notif',{message:"doctor ye le message"});
+    //Module for sending an availability json
+    //#todo: this has to be received from findAvailability.js
+
+    //======================================================
+    //Send the request as is
+    //Processing of data at client side
+
+    globalSocket.emit('notification',{
+        data:req.body.activities-heart-intraday.dataset
+    });
+    sockets.forEach(function(socket){
+        socket.emit('notification',{
+            data:req.body.activities-heart-intraday.dataset
+        });
+    });
+
+    //=======================================================
+    //#todo: res.send(appointment slot)
+    res.send("Need to send a scheduled appointment")
 
 });
 
+
 function setupSocket(){
+
     var http = require('http').Server(app);
     var io = require('socket.io')(http);
 
     io.on('connection', function(socket){
         console.log("socket atleast started");
+        sockets.push(socket);
         globalSocket = socket;
     });
-
+    //run cron method here
     http.listen(8080, function(){
         console.log("Listening on port");
     });

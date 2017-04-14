@@ -5,7 +5,7 @@ function getDateTime() {
     var hour = date.getHours();
     var min  = date.getMinutes();
 
-    if (min > 2) {
+    if (min >= 2) {
       min = min - 2;
     }
     else {
@@ -13,8 +13,8 @@ function getDateTime() {
           min = 0;
       }
       else {
-        hour = hour - 1;
-        min = 58 + min;
+              hour = hour - 1;
+              min = 58 + min;
       }
     }
 
@@ -39,13 +39,13 @@ function getSleeplog(token, resp) {
   var auth = "";
 
   if (token == "dummy")
-  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA4NjM5NiwiaWF0IjoxNDkyMDU3NTk2fQ.1m3-5tVpgAMUg8sWoqpybPDd-jO920uoMOVpaXo9OK0';
+  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJhY3QgcmhyIHJwcm8gcnNsZSIsImV4cCI6MTQ5MjE1NDg3OCwiaWF0IjoxNDkyMTI2MDc4fQ.xfMHXGE848O9JvTngVOyfCPaUwT2DazCYvLz3wPLV60';
   else
   auth = 'Bearer ' + token;
 
   var options = {
       host: 'api.fitbit.com',
-      path: '/1.2/user/-/sleep/date/2017-04-09/2017-04-11.json',
+      path: '/1.2/user/-/sleep/date/2017-04-09/2017-04-13.json',
       method: 'GET',
       headers: {
           'Authorization': auth
@@ -77,7 +77,7 @@ function getHeartrate(token, resp) {
   var auth = "";
 
   if (token == "dummy")
-  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA4NjM5NiwiaWF0IjoxNDkyMDU3NTk2fQ.1m3-5tVpgAMUg8sWoqpybPDd-jO920uoMOVpaXo9OK0';
+  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJhY3QgcmhyIHJwcm8gcnNsZSIsImV4cCI6MTQ5MjE1NDg3OCwiaWF0IjoxNDkyMTI2MDc4fQ.xfMHXGE848O9JvTngVOyfCPaUwT2DazCYvLz3wPLV60';
   else
   auth = 'Bearer ' + token;
 
@@ -127,7 +127,7 @@ function getSteps(token, resp) {
   var auth = "";
 
   if (token == "dummy")
-  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJociByYWN0IHJwcm8gcnNsZSIsImV4cCI6MTQ5MjA4NjM5NiwiaWF0IjoxNDkyMDU3NTk2fQ.1m3-5tVpgAMUg8sWoqpybPDd-jO920uoMOVpaXo9OK0';
+  auth = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1TFpGRFIiLCJhdWQiOiIyMjg4R0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyd2VpIHJhY3QgcmhyIHJwcm8gcnNsZSIsImV4cCI6MTQ5MjE1NDg3OCwiaWF0IjoxNDkyMTI2MDc4fQ.xfMHXGE848O9JvTngVOyfCPaUwT2DazCYvLz3wPLV60';
   else
   auth = 'Bearer ' + token;
 
